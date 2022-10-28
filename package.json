@@ -1,0 +1,50 @@
+{
+  "name": "repo-meat",
+  "version": "1.0.0",
+  "description": "Group of templates, examples of the components that we usually use in meat for projects. Especially for themosis.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SeveralReves/meat-repo.git"
+  },
+  "author": "Gabo & Bruno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SeveralReves/meat-repo/issues"
+  },
+  "homepage": "https://github.com/SeveralReves/meat-repo#readme",
+  "devDependencies": {
+    "browser-sync": "^2.26.3",
+    "browser-sync-webpack-plugin": "2.0.1",
+    "cross-env": "^5.1",
+    "laravel-mix": "^4.0.7",
+    "sass": "^1.17.2",
+    "vue-template-compiler": "2.6.14",
+    "sass-loader": "7.*"
+  },
+  "dependencies": {
+    "@vue/composition-api": "^1.7.0",
+    "axios": "^0.18",
+    "bootstrap": "^4.3.1",
+    "bootstrap-select": "^1.13.12",
+    "cheet.js": "^0.3.3",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2",
+    "lodash": "^4.17.11",
+    "material-design-icons": "^3.0.1",
+    "popper.js": "^1.14.7",
+    "sass-mq": "^5.0.1",
+    "simple-line-icons": "^2.4.1",
+    "slick-carousel": "^1.8.1",
+    "sweetalert": "^2.1.2",
+    "sweetalert2": "^11.4.23",
+    "vee-validate": "3",
+    "vue": "2.6.14",
+    "vue-recaptcha": "1.3.0",
+    "vuejs-datepicker": "^1.6.2",
+    "vuex": "3"
+  }
+}
