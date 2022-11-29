@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vee Validate - Example</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+      .form--container {
+          display: grid;
+          grid-template-columns: repeat(2,1fr);
+          gap: 10px 30px;
+          max-width: 1000px;
+          padding-bottom: 30px;
+      }
+      .form--column{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .form--column.textarea{
+        grid-column: 1/3;
+      }
+
+      .form--label {
+      font-family: "IBM Plex Sans";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0.02em;
+      color: #484848;
+    }
+    .form--input {
+      padding: 12px 8px;
+      font-family: "IBM Plex Sans";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0.02em;
+      color: #82879a;
+      border: none;
+      border-bottom: 1px solid #302ea7;
+    }
+    .form--input.invalid {
+     border-bottom: 1px solid red;
+     color: red;
+   }
+   .form--input:focus-visible {
+     outline: none;
+   }
+    .form--textarea {
+      padding: 12px 8px;
+      font-family: "IBM Plex Sans";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0.02em;
+      color: #82879a;
+      border: none;
+      border-bottom: 1px solid #302ea7;
+      resize: none;
+    }
+    .form--textarea.invalid {
+      border-bottom: 1px solid red;
+      color: red;
+    }
+    .form--textarea:focus-visible {
+      outline: none;
+    }
+    .form--select {
+      padding: 12px 8px;
+      font-family: "IBM Plex Sans";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 22px;
+      letter-spacing: 0.02em;
+      color: #82879a;
+      border: none;
+      border-bottom: 1px solid #302ea7;
+      background-repeat: no-repeat;
+      background-position: 95% 70%;
+      /* -webkit-appearance: none;
+      -moz-appearance: none;
+      -o-appearance: none; */
+      /* appearance: none; */
+    }
+    .form--select.invalid {
+      border-bottom: 1px solid red;
+      color: red;
+    }
+    .form--select:focus-visible {
+      outline: none;
+    }
+    .form--select.invalid {
+      border-bottom: 1px solid red;
+      color: red;
+    }
+
+    </style>
+
+  </head>
+  <body>
+    <a href="/">Regresar</a>
+    <h1>Vue</h1>
+
+    <div id="app">
+      <div class="section__form--container-form">
+        <validation-observer ref="formulario" slim>
+          <form
+            class="form"
+            role="form"
+            @submit.prevent="handleSubmit()"
+          >
+            <div class="form--container">
+              <validation-provider
+                rules="required"
+                v-slot="{ classes, errors }"
+                class="form--column"
+              >
+                <label for="name--input" class="form--label"
+                  >Nombre</label
+                >
+                <input
+                  id="name--input"
+                  class="form--input"
+                  :class="classes"
+                  v-model="data.name"
+                  autocomplete="off"
+                  type="text"
+                  name="Nombre"
+                  placeholder="Ingresa tu nombre"
+                />
+                <span v-if="errors.length > 0" class="form__error">
+                  {{ errors[0] }}</span
+                >
+              </validation-provider>
+              <validation-provider
+                rules="required"
+                v-slot="{ classes, errors }"
+                class="form--column"
+              >
+                <label for="surname--input" class="form--label"
+                  >Apellido</label
+                >
+                <input
+                  id="surname--input"
+                  class="form--input"
+                  :class="classes"
+                  v-model="data.surname"
+                  autocomplete="off"
+                  type="text"
+                  name="Apellido"
+                  placeholder="Ingresa tu apellido"
+                />
+                <span v-if="errors.length > 0" class="form__error">
+                  {{ errors[0] }}</span
+                >
+              </validation-provider>
+              <validation-provider
+                rules="required"
+                v-slot="{ classes, errors }"
+                class="form--column"
+              >
+                <label for="phone--input" class="form--label"
+                  >Teléfono</label
+                >
+                <input
+                  id="phone--input"
+                  class="form--input"
+                  :class="classes"
+                  v-model="data.phone"
+                  autocomplete="off"
+                  type="text"
+                  name="Teléfono"
+                  placeholder="+56 9 0000 0000"
+                />
+                <span v-if="errors.length > 0" class="form__error">
+                  {{ errors[0] }}</span
+                >
+              </validation-provider>
+              <validation-provider
+                rules="required|email"
+                v-slot="{ classes, errors }"
+                class="form--column"
+              >
+                <label for="email--input" class="form--label"
+                  >Correo</label
+                >
+                <input
+                  id="email--input"
+                  class="form--input"
+                  :class="classes"
+                  v-model="data.email"
+                  autocomplete="off"
+                  type="text"
+                  name="Correo"
+                  placeholder="Correo@mail.com"
+                />
+                <span v-if="errors.length > 0" class="form__error">
+                  {{ errors[0] }}</span
+                >
+              </validation-provider>
+              <validation-provider
+                v-slot="{ classes, errors }"
+                class="form--column"
+              >
+                <label for="egreso--input" class="form--label"
+                  >Asunto</label
+                >
+                <select
+                  id="egreso--input"
+                  name="Asunto"
+                  class="form--select"
+                  :class="{ selected: data.issue !== '', classes }"
+                  placeholder="Selecciona"
+                  v-model="data.issue"
+                >
+                  <option disabled value>Selecciona</option>
+                  <option
+                    v-for="(issue, index) in issues"
+                    :key="index"
+                    :value="issue.value"
+                  >
+                    {{ issue.label }}
+                  </option>
+                </select>
+                <span v-if="errors.length > 0" class="form__error">
+                  {{ errors[0] }}</span
+                >
+              </validation-provider>
+              <validation-provider
+                rules="required"
+                v-slot="{ classes, errors }"
+                class="form--column textarea"
+              >
+                <label for="message--input" class="form--label"
+                  >Mensaje</label
+                >
+                <textarea
+                  id="message--input"
+                  class="form--textarea"
+                  :class="classes"
+                  v-model="data.message"
+                  autocomplete="off"
+                  type="text"
+                  name="Establecimiento"
+                  placeholder="Ingresa aquí"
+                ></textarea>
+                <span v-if="errors.length > 0" class="form__error">
+                  {{ errors[0] }}</span
+                >
+              </validation-provider>
+            </div>
+            <div class="form--button text-center">
+              <button class="button__primary">Enviar</button>
+            </div>
+            <!-- <VueRecaptcha
+              ref="recaptcha"
+              size="invisible"
+              @verify="onVerify"
+              @expired="onExpired"
+              @error="onError"
+              loadRecaptchaScript
+              :sitekey="recaptchaKey"
+            >
+            </VueRecaptcha> -->
+          </form>
+        </validation-observer>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vee-validate@<3.0.0/dist/vee-validate.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script>
+      Vue.use(VeeValidate);
+      Vue.component("validation-provider", VeeValidate.ValidationProvider);
+      Vue.component("validation-observer", VeeValidate.ValidationObserver);
+      Vue.component("extend", VeeValidate.extend);
+      // VeeValidate.extend("email", {
+      //   ...email,
+      //   message: (field) => `${field} no valido`,
+      // });
+
+      // VeeValidate.extend("required", {
+      //   ...required,
+      //   message: (field) => `${field} es requerido`,
+      // });
+      var app = new Vue({
+        el: "#app",
+        data: {
+          contactSend: false,
+          data: {
+            name: "",
+            surname: "",
+            phone: "",
+            email: "",
+            issue: "",
+            education: "",
+            establishment: "",
+            message: "",
+            g_recaptcha_response: null,
+          },
+          issues: [
+            {
+              label: "asunto 1",
+              value: 1,
+            },
+            {
+              label: "asunto 2",
+              value: 2,
+            },
+          ],
+          loading: false,
+          error: false,
+          recaptchaKey: "6LeoST8jAAAAAAZGHRgugTsM0I2mCAsS9hmvfUbq",
+        },
+        methods: {
+          onVerify(response) {
+            this.data["g_recaptcha_response"] = response;
+            console.log(response);
+            this.submitForm();
+          },
+          onExpired() {
+            this.resetRecaptcha();
+          },
+          onError() {
+            this.loading = false;
+          },
+          resetRecaptcha() {
+            this.data["g_recaptcha_response"] = null;
+            this.$refs.recaptcha.reset();
+          },
+          handleSubmit() {
+            this.$refs.formulario.validate().then((success) => {
+              if (!success) {
+                return;
+              }
+              this.loading = true;
+              document.body.style.overflowY = "hidden";
+              this.$refs.recaptcha.execute();
+            });
+          },
+          async submitForm() {
+            this.loading = true;
+            try {
+              var formData = new FormData();
+              let res = await axios.get(
+                `/cms/wp-admin/admin-ajax.php?action=success`
+              );
+              const { data } = res;
+              if (data.success) {
+                window.location.href = "/gracias";
+              } else {
+                this.error = true;
+                this.loading = false;
+                document.body.style.overflowY = "auto";
+
+                Swal.fire({
+                  imageAlt: "logo",
+                  imageHeight: 100,
+                  title: "Error",
+                  text: data.error,
+                  customClass: {
+                    confirmButton: "button button__primary",
+                    title: "title__modal",
+                  },
+                  confirmButtonText: "cerrar",
+                  buttonsStyling: false,
+                });
+              }
+            } catch (error) {
+              this.loading = false;
+              this.error = true;
+              Swal.fire({
+                // imageUrl: this.themosis_assets + "/images/Ucsc-logo.svg",
+                imageAlt: "logo",
+                imageHeight: 100,
+                title: "Error",
+                text: "Ocurrió un error inesperado, intente nuevamente",
+                customClass: {
+                  confirmButton: "button button__primary",
+                  title: "title__modal",
+                },
+                confirmButtonText: "cerrar",
+                buttonsStyling: false,
+              });
+            }
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
